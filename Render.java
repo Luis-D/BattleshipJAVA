@@ -13,7 +13,11 @@ public class Render
 	    for(int o = 0;o<LL;o++)
 	    {
 		Point2D tmp2 = tmp.GetSection(o);
-		B.Set(tmp.GetType(),tmp2.x,tmp2.y);
+    		char C;
+		if(tmp.GetStatus(o)==false)
+		{C=tmp.GetType();}
+		else{C='-';}
+		B.Set(C,tmp2.x,tmp2.y);
 	    }
 	}
     }

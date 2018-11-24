@@ -38,5 +38,12 @@ public class Board
 	    {System.out.print("["+Quad[o][i]+"]");}
 	    System.out.println("["+Quad[o][i]+"]");
 	}
+    }
+    
+    public char Set(char Char, int X, int Y)
+    { 
+	if(X<0||Y<0||X>=this.Width||Y>=this.Height)
+	{return 0;}
+	else{this.Quad[X][Y]=Char; return 1;}
     } 
 } 
