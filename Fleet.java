@@ -27,7 +27,8 @@ public class Fleet
     {
 /*With this function, this fleet proceeds to attack a given fleet given a 2D point.
  * Based in this given 2D point, the attack is computed, in success it returns a pointer to the damaged enemy vessel.
-If a vessel gets destroyed, the Enemy fleet gets its FleetPower lowered by 1.
+If a vessel gets hit, this function returns its reference. otherwise it returns a null pointer
+If a vessel gets destroyed, the Enemy fleet gets its FleetPower lowered by 1.i
 */
 	Point2D Test = new Point2D();
 	int VC = Enemy.vessel.length;
