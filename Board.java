@@ -23,9 +23,10 @@ public class Board
     {
 	char Chara = 'A';
 	System.out.print("   ");
-	for (int u = 0;u<Width-1;u++)
-	{System.out.print(Chara+"  ");Chara++;}
-	System.out.println(Chara);
+	int u = 0;
+	for (;u<Width-1;u++)
+	{System.out.print(u+"  ");}
+	System.out.println(u);
 
 	for(int i =0;i<Height;i++)
 	{
@@ -33,7 +34,7 @@ public class Board
 
 	    o=0;
 	    
-	    System.out.print(i+" ");
+	    System.out.print(Chara+" ");Chara++;
 	    for (;o<Width-1;o++)
 	    {System.out.print("["+Quad[o][i]+"]");}
 	    System.out.println("["+Quad[o][i]+"]");
