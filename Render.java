@@ -6,6 +6,7 @@ public class Render
  * */
 	Vessel[] Fleetves = fleet.vessel;
 	int L = Fleetves.length;
+	
 	for(int i=0;i<L;i++)
 	{
 	    Vessel tmp = Fleetves[i];
@@ -25,7 +26,7 @@ public class Render
     public static void Salvo(AttackPoint[] SalvoReturn,int SalvoReturnCount, Board B)
     {
 /*It renders the data of the given Salvo Attack*/
-    
+   
 	for(int i=0;i<SalvoReturnCount;i++)
 	{
 	    B.Set(SalvoReturn[i].data,SalvoReturn[i].x,SalvoReturn[i].y);

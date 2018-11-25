@@ -3,7 +3,7 @@ public class FleetCommand extends Fleet
     public char FLAG;
     public int Streak;
 
-    public int SalvoReturnCount;
+    private int SalvoReturnCount;
     public AttackPoint[] SalvoReturn;
 
     public FleetCommand(int FleetPower)
@@ -11,7 +11,11 @@ public class FleetCommand extends Fleet
 	super(FleetPower);
 	FLAG = 0;
 	Streak=0;
-	SalvoReturn = new AttackPoint[FleetPower];
+	SalvoReturn = new AttackPoint[FleetPower];    
+	for(int i = 0;i<FleetPower;i++)
+	{
+	    SalvoReturn[i]=new AttackPoint(0,0);
+	}
     }
 
     public Vessel Attack(FleetCommand Enemy, Point2D AttackPoint)
@@ -24,13 +28,16 @@ public class FleetCommand extends Fleet
     public void SalvoAttack(FleetCommand Enemy, Point2D[] AttackPoints)
     {
 	Vessel tmp;
-	int SalvoReturnCount = this.Get_FleetPower(); //Do subclasses inherits private fields?
+	SalvoReturnCount = this.Get_FleetPower(); //Do subclasses inherits private fields?
 	if (AttackPoints.length < SalvoReturnCount){SalvoReturnCount=AttackPoints.length;}
 	for (int i = 0;i<SalvoReturnCount;i++)
 	{
 	    tmp = this.Attack(Enemy, AttackPoints[i]);
+	    SalvoReturn[i].Set_Point(AttackPoints[i]);
 	    if(tmp==null){SalvoReturn[i].data = 'X';}
 	    else{SalvoReturn[i].data = tmp.GetType();}
 	}	
     }
+
+    public int Get_SalvoReturnCount(){return SalvoReturnCount;}
 }

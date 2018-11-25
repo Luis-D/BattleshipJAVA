@@ -25,33 +25,37 @@
 //The Render class renders the information in the given Board.
 //Then, when the Board draws itself, the rendered information appears.
 
+import java.util.Scanner;
+
 public class main
 {
     public static void main(String[] args)
     {
-	int W,H;
-	W=10;
-	H=10;	   
+	Scanner cin = new Scanner(System.in);
+	String Command;
+    
+	int BoardSize[]={10,10};	   
+	int FleetSize[]={0,0};
 
-	Board Radar = new Board(H,W);
-	Board Fleet = new Board(H,W);	    
+	Board Radar = new Board(BoardSize[0],BoardSize[1]);
+	Board Fleet = new Board(BoardSize[0],BoardSize[1]);
 
-	FleetCommand P = new FleetCommand(2);
-	P.Vessel_Add(new Vessel('A',0,1, 1,0, 2));
-	P.Vessel_Add(new Vessel('B',2,0,0,1,4)); 
+	FleetCommand P1 = new FleetCommand(FleetSize[0]);
+	FleetCommand P2 = new FleetCommand(FleetSize[1]);
 
-	FleetCommand X = new FleetCommand(1);
-	P.Vessel_Add(new Vessel('A',0,0,0,1,1));    
-
-	X.Attack(P,new Point2D(0,1));
-
-	Render.Fleet(P,Fleet);	
-	
-	System.out.println("");
-	System.out.println("Radar");
-	Radar.Draw();	   
-	System.out.println("");
-	System.out.println("Fleet");
-	Fleet.Draw(); 
+	while(true) //Game Loop
+	{	    
+	    Render.Fleet(P1,Fleet);	
+	    Render.Salvo(P1.SalvoReturn,P1.Get_SalvoReturnCount(),Radar);
+	    System.out.println("");
+	    System.out.println("Radar");
+	    Radar.Draw();	   
+	    System.out.println("");
+	    System.out.println("Fleet");
+	    Fleet.Draw();
+	    System.out.println("Vessels: "+P1.Get_FleetPower());
+	    System.out.println("Enter Command:");
+	    Command = cin.nextLine(); //<-- This string (Command) is the entered command
+	} 
     }
 }
