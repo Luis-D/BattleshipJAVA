@@ -23,8 +23,8 @@ public class Board
     {
 	char Chara = 'A';
 	System.out.print("   ");
-	int u = 0;
-	for (;u<Width-1;u++)
+	int u = 1;
+	for (;u<Width;u++)
 	{System.out.print(u+"  ");}
 	System.out.println(u);
 
