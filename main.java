@@ -35,13 +35,18 @@ public class main
 	String Command;
     
 	int BoardSize[]={10,10};	   
-	int FleetSize[]={0,0};
+	int FleetSize[]={0,9};
 
 	Board Radar = new Board(BoardSize[0],BoardSize[1]);
 	Board Fleet = new Board(BoardSize[0],BoardSize[1]);
 
 	FleetCommand P1 = new FleetCommand(FleetSize[0]);
 	FleetCommand P2 = new FleetCommand(FleetSize[1]);
+
+	IA Computer = new IA(P2);
+	
+	Computer.Generate_Fleet(BoardSize[0],BoardSize[1]);
+
 
 	while(true) //Game Loop
 	{	    
@@ -54,7 +59,7 @@ public class main
 	    System.out.println("Fleet");
 	    Fleet.Draw();
 	    System.out.println("Vessels: "+P1.Get_FleetPower());
-	    System.out.println("Enter Command:");
+	    System.out.println("Enter Attack Command (XY XY XY ...):");
 	    Command = cin.nextLine(); //<-- This string (Command) is the entered command
 	} 
     }
