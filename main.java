@@ -1,4 +1,4 @@
-//Both Human an Computer are players.
+//Both Human and Computer are players.
 //The Human enters instructions via the input (in-game command line).
 //The Computer enters instructions via its AI.
 //Each player is a FleetCommand.
@@ -54,7 +54,8 @@ public class main
 	FleetCommand P2 = new FleetCommand(FleetSize[1]);
 
 	Human Player = new Human(P1);
-	Player.Generate_Fleet(args[0]);
+	if(Player.Generate_Fleet(args[0])!=1)
+	{return;}
 
 	IA Computer = new IA(P2);	
 	Computer.Generate_Fleet(BoardSize[0],BoardSize[1]);
@@ -71,8 +72,21 @@ public class main
 	    System.out.println("Fleet");
 	    Fleet.Draw();
 	    System.out.println("Vessels: "+P1.Get_FleetPower());
-	    System.out.println("Enter Attack Command (XY XY XY ...):");
-	    Command = cin.nextLine(); //<-- This string (Command) is the entered command
+	    do
+	    {
+		System.out.println("Enter Attack Command (XY XY XY ...):");
+		Command = cin.nextLine(); //<-- This string (Command) is the entered command
+	    }while(Player.Execute_Command(Command,Computer.Fleet)!=1);
+
+	    Computer.Act(Player.Fleet);
+
+	    Render.Salvo(P2.SalvoReturn,P2.Get_SalvoReturnCount(),Fleet);
+
+	    if(Player.Fleet.Get_FleetPower()<=0)
+	    {System.out.println("You Lose");break;}
+
+	    if(Computer.Fleet.Get_FleetPower()<=0)
+	    {System.out.println("You Win");break;}
 	} 
     }
 }
