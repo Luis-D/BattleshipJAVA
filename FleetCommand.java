@@ -1,6 +1,6 @@
 public class FleetCommand extends Fleet
 {
-    public char FLAG;
+    public int FLAG;
     public int Streak;
 
     private int SalvoReturnCount;

@@ -13,6 +13,11 @@ public class Fleet
 	vessel = new Vessel[Number_of_Vessels];
 	FleetPower = Number_of_Vessels;
     }
+
+    public Vessel Get_Vessel(int i)
+    {
+	return this.vessel[i];
+    }
     
     public void Vessel_Add(Vessel new_vessel)
     {
@@ -45,7 +50,7 @@ If a vessel gets destroyed, the Enemy fleet gets its FleetPower lowered by 1.i
 		    {
 			crrnt.DMG(o);
 			if(crrnt.GetFLAG()==0)
-			{this.FleetPower--;}
+			{Enemy.FleetPower--;}
 			return crrnt;
 		    }
 		    Test.Add(crrnt.Norm_Dir);

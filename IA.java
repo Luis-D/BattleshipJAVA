@@ -5,12 +5,64 @@ import java.util.List;
 public class IA
 {
     FleetCommand Fleet;
-    char FLAG;
+    boolean[][] Memory;
+
     List<Point2D> Point2DList =new ArrayList<Point2D>();
 
     public IA(FleetCommand Fleet)
     {
 	this.Fleet = Fleet;
+        Memory = new boolean[10][10];
+        for(int i =0;i<9;i++)
+        {
+            for (int o=0;o<9;o++)
+            {
+                Memory[o][i]=false;
+            }
+       }
+
+    }
+
+    public void Act(FleetCommand Enemy)
+    {
+        int Max = this.Fleet.Get_FleetPower();
+
+        if(Fleet.Streak>1){Max++;Fleet.Streak=0;}
+
+        Point2D[] Attk = new Point2D[Max];
+
+	int Chances=1000;int Tests=0;
+
+        Random rand = new Random();
+        for(int i = 0;i<Max;i++)
+        {
+	    Tests=0;
+            while(true)
+            {
+                int Y = rand.nextInt((9)+1);
+                int X = rand.nextInt((9)+1);
+
+		//System.out.println(X+","+Y);
+
+		if(Tests>=Chances) //<-The system tried to find a place too many times
+		{
+		    i=Max;
+		    break;
+		}
+		else
+		{	
+		    if(Memory[X][Y]==true){
+			Tests++;
+			continue;}
+		}
+
+                Memory[X][Y]=true;
+                Attk[i] = new Point2D(X,Y);
+                break;
+                
+            }
+        }
+        this.Fleet.SalvoAttack(Enemy,Attk);
     }
 
     public void Generate_Fleet(int Board_W, int Board_H)
