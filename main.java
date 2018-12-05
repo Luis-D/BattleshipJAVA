@@ -31,11 +31,21 @@ public class main
 {
     public static void main(String[] args)
     {
+	int argsc = args.length;
+	
+	if(argsc==0)
+	{
+	    System.out.println("Please enter a Fleet file as an argument");
+	    System.out.println("A Fleet file is a plain text file describing a fleet");
+
+	    return;
+	}
+    
 	Scanner cin = new Scanner(System.in);
 	String Command;
     
 	int BoardSize[]={10,10};	   
-	int FleetSize[]={0,9};
+	int FleetSize[]={9,9};
 
 	Board Radar = new Board(BoardSize[0],BoardSize[1]);
 	Board Fleet = new Board(BoardSize[0],BoardSize[1]);
@@ -43,12 +53,14 @@ public class main
 	FleetCommand P1 = new FleetCommand(FleetSize[0]);
 	FleetCommand P2 = new FleetCommand(FleetSize[1]);
 
-	IA Computer = new IA(P2);
-	
+	Human Player = new Human(P1);
+	Player.Generate_Fleet(args[0]);
+
+	IA Computer = new IA(P2);	
 	Computer.Generate_Fleet(BoardSize[0],BoardSize[1]);
 
 
-	while(true) //Game Loop
+	while(P1.Get_FleetPower()>0 && P2.Get_FleetPower()>0) //Game Loop
 	{	    
 	    Render.Fleet(P1,Fleet);	
 	    Render.Salvo(P1.SalvoReturn,P1.Get_SalvoReturnCount(),Radar);
