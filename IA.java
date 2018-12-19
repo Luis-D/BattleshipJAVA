@@ -42,19 +42,16 @@ public class IA
                 int Y = rand.nextInt((9)+1);
                 int X = rand.nextInt((9)+1);
 
-		//System.out.println(X+","+Y);
-
-		if(Tests>=Chances) //<-The system tried to find a place too many times
-		{
-		    i=Max;
-		    break;
-		}
-		else
-		{	
-		    if(Memory[X][Y]==true){
-			Tests++;
-			continue;}
-		}
+                      if(Memory[X][Y]==true)
+                      {
+                         for(int xx=0;xx<10;xx++)
+                          {
+                             for(int yy=0;yy<10;yy++)
+                            {
+                                if(Memory[xx][yy]==false){X=xx;Y=yy;}
+                            }
+                        }
+                     }
 
                 Memory[X][Y]=true;
                 Attk[i] = new Point2D(X,Y);

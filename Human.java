@@ -29,12 +29,13 @@ public class Human
 
 	if(Fleet.Streak>1){Max++;Fleet.Streak=0;}
 
-	Point2D[] Attk = new Point2D[Max];
-
+Point2D[] Attk;
 
 	//No commands means automated attack
 	if(Command.length()<=0)
 	{
+	    Attk = new Point2D[Max];
+	    
 	    int Tests=0; int Chances=1000;
 	    Random rand = new Random();
 	    for(int i = 0;i<Max;i++)
@@ -44,18 +45,32 @@ public class Human
 		{
 		    int Y = rand.nextInt((9)+1);
                     int X = rand.nextInt((9)+1);
-	
+		    
+		    if(Memory[X][Y]==true)
+		    {
+			for(int xx=0;xx<10;xx++)
+			{
+			    for(int yy=0;yy<10;yy++)
+			    {
+				if(Memory[xx][yy]==false){X=xx;Y=yy;
+				xx=11;yy=11;
+				} 
+			    }
+			}
+		    }
+		    /*
 		    if(Tests>=Chances) //<-The system tried to find a place too many times
 		    {
 			i=Max;
 			break;
 		    }
-		    else
+		    else*/
+		    /*
 		    {
 			if(Memory[X][Y]==true){
 			    Tests++;
 			    continue;}
-		    } 
+		    } */
 
 		    Memory[X][Y]=true;
 		    Attk[i] = new Point2D(X,Y);
@@ -70,7 +85,11 @@ public class Human
 	    Parts = Command.split(" ");	
 	    PartsCount = Parts.length;
 	    if(PartsCount < Max){Max=PartsCount;}
-	    
+	   
+	    System.out.println(PartsCount);
+ 
+	 Attk = new Point2D[Max];
+	   
 	    for(int i = 0;i<Max;i++)
 	    {
 		String tmp_ = Parts[i];
@@ -91,6 +110,8 @@ public class Human
 
 		Memory[X][Y] = true;
 		Attk[i] = new Point2D(X,Y);
+
+		System.out.println(Attk.length);
 	    }
 	}
 
@@ -130,10 +151,21 @@ public class Human
 	    {
 		String tmp_ = Parts[i];
 
+		int ttmpp=0;
+
 		char T = tmp_.charAt(0);
 		int Y = ((int)tmp_.charAt(1)) - 65;
 		int X = Character.getNumericValue(tmp_.charAt(2)) -1;
-		int Dir=Character.getNumericValue(tmp_.charAt(3));
+		   
+		ttmpp=3;
+
+		if(tmp_.length()>4)
+		{
+		    X+= ((X+1)*10)+(Character.getNumericValue(tmp_.charAt(ttmpp))) -1;
+		    System.out.println(X);
+		    ttmpp++;
+		}
+		int Dir=Character.getNumericValue(tmp_.charAt(ttmpp));
 		Point2D _Dir_ = Directions[Dir];
 		
 		if(Y<0 || Y>9 || X<0 || X>9 || Dir<0 || Dir>3)
